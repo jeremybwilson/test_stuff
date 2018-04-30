@@ -12,18 +12,19 @@ app.appendChild(container);
 
 var apiKey = "9c898c8f866a4bcc9839c3d30ee89c81";
 
-var request = new XMLHttpRequest();
-request.open("GET", "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/", true);
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/", true);
+xhr.setRequestHeader("X-API-Key", apiKey);
+
+// var request = new XMLHttpRequest();
+// request.open("GET", "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/", true);
 // request.open("GET", "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/w00kieem0nster/", true);
-request.setRequestHeader("X-API-Key", apiKey);
+// request.setRequestHeader("X-API-Key", apiKey);
 
-
-request.onreadystatechange = function(){
+xhr.onreadystatechange = function(){
   // Begin accessing JSON data here
-  var data = JSON.parse(this.response);
   //if (request.status >= 200 && request.status < 400) {
-  if (request.readyState === 4 && request.status === 200){
-
+  if (this.readyState === 4 && this.status === 200){
     var json = JSON.parse(this.responseText);
 
     console.log(json.Response.data.inventoryItem.itemName); //Gjallarhorn
@@ -38,4 +39,4 @@ request.onreadystatechange = function(){
   }
 }
 
-request.send();
+xhr.send();
