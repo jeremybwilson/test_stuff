@@ -9,7 +9,7 @@ container.setAttribute('class', 'container');
 app.appendChild(logo);
 app.appendChild(container);
 
-var apiKey = "YOUR-API-KEY-HERE";
+var apiKey = "9c898c8f866a4bcc9839c3d30ee89c81";
 
 var request = new XMLHttpRequest();
 request.open("GET", "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/", true);
