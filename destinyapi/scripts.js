@@ -14,17 +14,24 @@ var apiKey = "9c898c8f866a4bcc9839c3d30ee89c81";
 
 var request = new XMLHttpRequest();
 request.open("GET", "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/", true);
+// request.open("GET", "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/w00kieem0nster/", true);
 request.setRequestHeader("X-API-Key", apiKey);
 
-// Begin accessing JSON data here
+
 request.onreadystatechange = function(){
- if(this.readyState === 4 && this.status === 200){
-  console.log(this.readyState + ', ' + this.status);
+  // Begin accessing JSON data here
+  var data = JSON.parse(this.response);
+  //if (request.status >= 200 && request.status < 400) {
+  if (request.readyState === 4 && request.status === 200){
 
-  var json = JSON.parse(this.responseText);
-  console.log(json.Response.data.inventoryItem.itemName); //Gjallarhorn
+    var json = JSON.parse(this.responseText);
 
- } else {
+    console.log(json.Response.data.inventoryItem.itemName); //Gjallarhorn
+    // console.log(data.Response.displayName); //w00kieem0nster
+    // console.log('readyState is: ' + this.readyState + ', and status code is: ' + this.status);
+
+    // data.forEach(inventoryItem => {});
+  } else {
     const errorMessage = document.createElement('marquee');
     errorMessage.textContent = `Gah, it's not working!`;
     app.appendChild(errorMessage);
