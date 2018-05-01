@@ -10,12 +10,12 @@ container.setAttribute('class', 'container');
 app.appendChild(logo);
 app.appendChild(container);
 
-// var apiKey = "9c898c8f866a4bcc9839c3d30ee89c81";
-var apiKey2 = "9845829cd998413ab5b278e260824797";
+var apiKey = "9c898c8f866a4bcc9839c3d30ee89c81";
+// var apiKey2 = "9845829cd998413ab5b278e260824797";
 
 var xhr = new XMLHttpRequest();
 xhr.open("GET", "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/", true);
-xhr.setRequestHeader("X-API-Key", apiKey2);
+xhr.setRequestHeader("X-API-Key", apiKey);
 
 // var request = new XMLHttpRequest();
 // request.open("GET", "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/", true);
