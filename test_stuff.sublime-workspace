@@ -1,0 +1,803 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "destinyapi/index.html",
+			"settings":
+			{
+				"buffer_size": 918,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sandbox/todo/dist/index.html",
+			"settings":
+			{
+				"buffer_size": 1202,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sandbox/todo/index.html",
+			"settings":
+			{
+				"buffer_size": 1206,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sandbox/todo/js/script00.js",
+			"settings":
+			{
+				"buffer_size": 2128,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sandbox/todo/js/script01.js",
+			"settings":
+			{
+				"buffer_size": 4762,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sandbox/todo/src/index.js",
+			"settings":
+			{
+				"buffer_size": 1434,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/jeremybwilson/Documents/Github/code/messagelist/app/app.js",
+			"settings":
+			{
+				"buffer_size": 774,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "angular.module('firstModule', []);  // defines a module with no dependencies\n\nangular.module('firstModule', ['moduleA', 'moduleB']);  // defines a module with 2 dependencies\n\nvar firstModule = angular.module('firstModule', []);  // defines a module\n\nfirstModule.controller('FirstController', function($scope){\n  // register your controller\n    // your rocking controller\n})",
+			"settings":
+			{
+				"buffer_size": 373,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "// Array Basic Challenges\n\n// ====================================================\n// PushFront\n// Given an array and an additional value, insert this \n// value at the beginning of the array. Do this without \n// using any built-in array methods. PushFront(arr,val)\n// ====================================================\n\n// use length property to shift values at current index \n// to index + 1 then just swap in the first\n\n// ES5 no built ins\nfunction pushFront(inputArray, frontVal){\n  // loop\n  for(let i = inputArray.length; i >= 0; i -= 1){\n    inputArray[i] = inputArray[i - 1]\n  }\n  // [ 11, 22, 33 ] => [ 11, 11, 22, 33 ]\n  inputArray[0] = frontVal;\n  // [ frontVal, 11, 22, 33 ]\n  return inputArray;\n}\n\nconsole.log(pushFront([11, 22, 33], 0));\n\n// ES5 built in\nfunction pushFrontBI(inputArray, frontVal){\n  inputArray.unshift(frontVal);\n  return inputArray;\n}\n\n// setting inputArray to the inArr.unshift will return a value = new length.\nconsole.log(pushFrontBI([11, 22, 33], 0));\n\n// ES6 \npushFrontES6 = (inputArray, frontVal) => {\n    inputArray.unshift(frontVal);\n    return inputArray\n}\n// or if you try to just return the array, you'll get length (so no fancy one liner...)\n\nconsole.log(pushFrontES6([11, 22, 33], 0));\n\n// =================================================================================\n// InsertAt\n// Given an array, index, and additional value, insert the value into the array \n// at the given index.  Do this without using built-in array methods. You can think \n// of PushFront(arr,val) as equivalent to InsertAt(arr,0,val).\n// =================================================================================\n// so lets start the loop at the back and run it to the index we want then that \n// index is what is inside the set val line outside the loop\n\nfunction insertAt(inputArray, insertAtIndex, valueToInsert){\n    for(let i = inputArray.length; i >= insertAtIndex; i -= 1){\n        inputArray[i] = inputArray[i - 1];\n    }\n    // at this point, all values should be pushed + 1, and at the insert index, \n    // the val after === current index (dup)\n    inputArray[insertAtIndex] = valueToInsert;\n    return inputArray\n}\n\nconsole.log(insertAt([1, 2, 3, 4, 5], 1, 6));\n\n\nfunction insertAtBuiltIn(inputArray, insertAtIndex, valueToInsert){\n  // use splice\n  inputArray.splice(insertAtIndex, 0, valueToInsert)\n  return inputArray;\n}\nconsole.log(insertAtBuiltIn([1, 2, 3, 4, 5], 3, 6))\n\ninsertAtES6 = (inputArray, insertAtIndex, valueToInsert) => {\n  inputArray.splice(insertAtIndex, 0, valueToInsert)\n  return inputArray;\n}\n\nconsole.log(insertAtES6([1, 2, 3, 4, 5], 4, 6));\n\n// ======================================================================================================================\n// PopFront\n// Given an array, remove and return the value at the beginning of the array. Do this without using any built-in array methods except pop().\n// ====================================================================================================================== \n// remove the front.  store front in a temp variable, then move all front, swap last with saved front, pop back\n\nlet arrayOfVals = [1, 2, 3, 4, 5, 6];\n\nfunction popFront(inputArray){\n    let tempVar = inputArray[0];\n    for(let i = 0; i < inputArray.length - 1; i += 1){\n        inputArray[i] = inputArray[i + 1];\n    }\n    // here you can swap and pop\n    inputArray[inputArray.length - 1] = tempVar;\n    return inputArray.pop();\n    // or just make the lenght shorter and return the tempVar\n    // inputArray.length = inputArray.length - 1;\n    // return tempVar;\n}\n\nconsole.log('Removed:', popFront(arrayOfVals));\nconsole.log(arrayOfVals);\nconsole.log('Removed:', popFront(arrayOfVals));\nconsole.log(arrayOfVals);\n\nfunction popFrontBI(inputArray){\n  return inputArray.shift();\n}\n\nconsole.log('Removed', popFrontBI(arrayOfVals));\nconsole.log(arrayOfVals);\n\npopFrontES6 = (inputArray) => inputArray.shift();\n\nconsole.log('Removed', popFrontES6(arrayOfVals));\nconsole.log(arrayOfVals);\n\n// ======================================================================================================================\n// RemoveAt\n// Given an array and an index into the array, remove and return the array value at that index. Do this without using any \n// built-in array methods except pop(). Think of PopFront(arr) as equivalent to RemoveAt(arr,0). \n// ======================================================================================================================\n// Pseudo Code - save value at index to remove.  start loop from index, then go through array, swapping avlues forward. for the \n// last part, either cut the length -1 and return first value, or push new value to the end and then pop, return pop value.\n\nlet arrayOfVals04 = [1, 2, 3, 4, 5, 6];\n\nfunction removeAt(inputArray, indexToRemove){\n  let removeValue = inputArray[indexToRemove];\n  for(let i = indexToRemove; i < inputArray.length; i += 1){\n    inputArray[i] = inputArray[i + 1];\n  }\n  // now index to Remove doesn't exist (except in tempVar)\n  // so either cut length and return the tempVar\n\n  inputArray.length = inputArray.length - 1;\n  return removeValue\n\n  // or swaup in remove balue to back and pop\n  // inputArray[inputArray.length - 1] = removeValue\n  // return inputArray.pop();\n}\n\nconsole.log(removeAt(arrayOfVals04, 1));\nconsole.log(arrayOfVals04);\n\nfunction removeAtBI(inputArray, indexToRemove){\n  // seems like this should be splice\n  let removedValue = inputArray.splice(indexToRemove, 1);\n  return removedValue;\n}\n\nconsole.log(removeAtBI(arrayOfVals04, 2));\nconsole.log(arrayOfVals04);\n\nremoveAtES6 = (inputArray, indexToRemove) => {\n  let removedValue = inputArray.splice(indexToRemove, 1);\n  return removedValue[0];\n}\n\nconsole.log(removeAtES6(arrayOfVals04, 3));\nconsole.log(arrayOfVals04);",
+			"settings":
+			{
+				"buffer_size": 5789,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "// Week 1 Wednesday\n\n// Array: Swap Pairs          \n// Swap positions of successive pairs of values of given array. If length is odd, do not change the final element. \n// For [1,2,3,4], return [2,1,4,3]. For example, change input [\"Brendan\",true,42] to [true,\"Brendan\",42]. \n// As with all array challenges, do this without using any built-in array methods.\n\nfunction swapPairs(array) {\n  let index = 0;\n\n  while (array[index] && array[index + 1]) {\n    let temp = array[index];\n    array[index] = array[index + 1];\n    array[index + 1] = temp;\n\n    index += 2;\n  }\n\n  return array;\n}\n\nconsole.log(swapPairs([1,2,3,4]));\nconsole.log(swapPairs([1,2,3,4,5]));\nconsole.log(swapPairs([\"Brendan\",true,42]));\n\n\n// Array: Remove Duplicates         \n// Sara is looking to hire an awesome web developer and has received applications from various sources. \n// Her assistant alphabetized them but noticed some duplicates. Given a sorted array, remove duplicate values. \n// Because array elements are already in order, all duplicate values will be grouped together. \n// As with all these array challenges, do this without using any built-in array methods.\n// [1,2,3,3,4]\n// [1,2,3,4]\n\n// [1,2,3,3,3,3,4]\n// [1,2,3,4]\n\nfunction removeDuplicates(array) {\n  function removeAt(arr, idx) {\n    let value = arr[idx];\n    for (let i = idx; i < arr.length-1; i++) {\n      arr[i] = arr[i+1];\n    }\n    arr.pop();\n  }\n\n  for (let i = 0; i < array.length; i++) {\n    if (array[i] === array[i + 1]) {\n      removeAt(array, i);\n      i--;\n    }\n  }\n\n  return array;\n}\n\nconsole.log(removeDuplicates([1,2,3,3,4]));\nconsole.log(removeDuplicates([1,2,3,3,3,3,4]));\n\n\n// Array: Min to Front          \n// Given an array of comparable values, move the lowest element to array’s front, shifting backward any elements previously ahead of it. \n// Do not otherwise change the array’s order. Given [4,2,1,3,5], change it to [1,4,2,3,5] and return it. \n// As always, do this without using built-in functions.\n\nfunction minToFront(array) {\n  function removeAt(arr, idx) {\n    let value = arr[idx];\n    for (let i = idx; i < arr.length-1; i++) {\n      arr[i] = arr[i+1];\n    }\n    arr.pop();\n  }\n\n  function pushFront(arr, val) {\n    for (let i = arr.length; i > 0; i--) {\n      arr[i] = arr[i-1];\n    }\n    arr[0] = val;\n  }\n\n  let index = 0;\n  let min = array[0];\n\n  for (let i = 0; i < array.length; i++) {\n    if (array[i] < min) {\n      min = array[i];\n      index = i;\n    }\n  }\n  removeAt(array, index);\n  pushFront(array, min);\n\n  return array;\n}\n\nconsole.log(minToFront([4,2,1,3,5]));\nconsole.log(minToFront([4,2,1,-1,3,5]));\n\n// Array: Reverse         \n// Given a numerical array, reverse the order of values, in-place. \n// The reversed array should have the same length, with existing elements moved to other indices so that order of elements is reversed. \n// Working ‘in-place’ means that you cannot use a second array – move values within the array that you are given. \n// As always, do not use built-in array functions such as splice(). \n// [1,2,3,4] -> [4,3,2,1]\n\nfunction reverse(array) {\n  let x = 0;\n  let y = array.length - 1;\n\n  while (x < array.length/2 ) {\n    [array[x], array[y]] = [array[y], array[x]];\n    x++;\n    y--;\n  }\n  return array;\n}\n\nconsole.log(reverse([1,2,3,4]));\nconsole.log(reverse([1,2,3,4,5]));\n\n\n// BONUS: Week 1 Wednesday\n\n// Array: Rotate          \n// Implement rotateArr(arr, shiftBy) that accepts array and offset. Shift arr’s values to the right by that amount. \n// ‘Wrap-around’ any values that shift off array’s end to the other side, so that no data is lost. \n// Operate in-place: given ([1,2,3],1), change the array to [3,1,2]. \n// Don’t use built-in functions. \n// Second: allow negative shiftBy (shift L, not R).\n// Third: minimize memory usage. With no new array, handle arrays/shiftBys in the millions. \n// Fourth: minimize the touches of each element.  \n\nfunction rotate(array, shiftBy) {\n  if (shiftBy >= 0) {\n    for (let i = array.length + (shiftBy - 1); i > 0; i--) {\n      array[i] = array[i - shiftBy];\n    }\n    for (let i = (shiftBy - 1); i >= 0; i--) {\n      array[i] = array.pop();\n    }\n  } else if (shiftBy < 0) {\n    shiftBy = Math.abs(shiftBy);\n    let count = 0;\n      while (count < shiftBy) {\n        array[array.length] = array[0];\n        for (let i = 0; i < array.length; i++) {\n          array[i] = array[i + 1];\n        }\n      array.pop();\n      count++;\n    }\n  }\n\n  return array;\n}\n\nconsole.log(rotate([1,2,3,4,5,6,7,8,9], 3));\nconsole.log(rotate([1,2,3,4,5,6,7,8,9], 6));\nconsole.log(rotate([1,2,3,4,5,6,7,8,9], 0));\nconsole.log(rotate([1,2,3,4,5,6,7,8,9], -3));\nconsole.log(rotate([1,2,3,4,5,6,7,8,9], -6));\n\n\n// Array: Filter Range        \n// Alan is good at breaking secret codes. One method is to eliminate values that lie within a specific known range. \n// Given arr and values min and max, retain only the array values between min and max. \n// Work in-place: return the array you are given, with values in original order. No built-in array functions.\n        \nfunction filterRange(array, min, max) {\n    if (min > max) throw 'Bad input!';\n\n    function removeAt(arr, idx) {\n        for (let i = idx; i < arr.length-1; i++) {\n            arr[i] = arr[i+1];\n        }\n        arr.pop();\n    }\n\n    for (let i = 0; i < array.length; i++) {\n        if (array[i] > max || array[i] < min) {\n            removeAt(array, i);\n            i--;\n        }\n    }\n    return array;\n}\n\nconsole.log(filterRange([1,2,3,4,5,6,7,8,9], 3, 6));\n// console.log(filterRange([1,2,3,4,5,6,7,8,9], 9, 6));\n\n\n// Array: Concat          \n// Replicate JavaScript’s concat(). Create a standalone function that accepts two arrays. \n// Return a new array containing the first array’s elements, followed by the second array’s elements. \n// Do not alter the original arrays. Ex.: arrConcat( ['a','b'], [1,2] ) should return new array ['a','b',1,2].\n\nfunction concatArr(arr1, arr2) {\n    let array = [];\n    for (let i = 0; i < arr1.length; i++) {\n        array.push(arr1[i]);\n    }\n    for (let i = 0; i < arr2.length; i++) {\n        array.push(arr2[i]);\n    }\n\n    return array;\n}\n                 \nconsole.log(concatArr(['a','b'], [1,2]));\n\n// Skyline Heights        \n// Lovely Burbank has a breathtaking view of the Los Angeles skyline. \n// Let’s say you are given an array with heights of consecutive buildings, starting closest to you and extending away. \n// Array [-1,7,3] would represent three buildings: first is actually out of view below street level, \n// behind it is second at 7 stories high, third is 3 stories high (hidden behind the 7-story). \n// You are situated at street level. Return array containing heights of buildings you can see, in order. \n// Given [-1,1,1,7,3] return [1,7]. Given [0,4] return [4]. \n// As always with challenges, do not use built-in array functions such as unshift().\n\nfunction skyline(array) {\n    let max = 0;\n\n    function removeAt(arr, idx) {\n        for (let i = idx; i < arr.length-1; i++) {\n            arr[i] = arr[i+1];\n        }\n        arr.pop();\n    }\n\n    for (let i = 0; i < array.length; i++) {\n        if (array[i] > max) { \n            max = array[i];\n            if (array[i + 1] <= max) {\n                removeAt(array, i + 1);\n            }\n        }\n        if (array[i] < 1 || array[i] < max) {\n            removeAt(array, i);\n            i--;\n        }\n    }\n\n    return array;\n}\n\nconsole.log(skyline([-1,1,1,7,3]));\nconsole.log(skyline([0,4]));\nconsole.log(skyline([-1,2,1,7,3,6,9,-2,15]));",
+			"settings":
+			{
+				"buffer_size": 7472,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "var myptag = document.getElementsByTagName(\"p\")[1];\n// console.log(myptag);\n// console.dir(myptag);\nmyptag.innerText = \"This is my text\";\nmyptag.style.border = \"1px solid #000\"\n\nvar mydivtag = document.getElementsByTagName(\"div\")[0]\n// console.log(mydivtag);\n// console.dir(mydivtag);\n\nmydivtag.id = \"special\";\nmydivtag.className = \"specialID\";\nmydivtag.draggable = true;\n\n// mydivtag.ondrag = function() {\n//   console.log(\"dragging\");\n// }\n\nmydivtag.ondrag = function() {\n  mydivtag.style.fontSize = \"25px\";\n}\nmydivtag.ondragend = function() {\n  mydivtag.style.fontSize = \"12px\";\n}\n\n\n\nvar age = 30;\nvar person = {\n  name: \"Jeremy\",\n  age: 42,\n  details: {\n    hobbies: [\"Sports\", \"Cooking\"],\n    location: \"Seattle\"\n  },\n  greet: function(){\n    console.log('Hello, My name is ' + this.name + ' and I\\'m ' + this.age + ' years old');\n  }\n};\n\nvar field = 'some_name';  // a variable to be dynamjically obtained via code\n// console.log(person['some_name']);  // not to be used by default\n\n console.log(person.name);\n// if you know the name of the field you want \n// to access always use the dot notation\nconsole.log(person.details.hobbies);\nconsole.log(typeof person.name);\n\nvar anotherPerson = new Object();\nanotherPerson.name = 'Anna';\nanotherPerson.age = 35;\nconsole.log(anotherPerson);\n\nvar person2 = {\n  name: \"Jeremy\",\n  age: 42\n};\nvar person3 = {\n  name: \"Jeremy\",\n  age: 42\n};\nconsole.log(person3 == person2);  // false because objects are references types and are stored as pointers\n\n// console.log(person.toString());\n\nObject.prototype.greet = function() {\n  console.log('Hello there!  I am ' + this.name + '!');\n};\n\nvar jeremy = Object.create(person);\nconsole.log(jeremy.name);\nvar anna = Object.create(person);\n// anna.name = 'Anna';\n// jeremy.greet();\n// anna.greet();\n\n// console.log(jeremy.__proto__.__proto__ == Object.prototype);  // unsafe to use in production code\nconsole.log(Object.getPrototypeOf(jeremy) == person);\n\n\nconst myComputer = {\n  operatingSystem: 'mac',\n  screenSize: '15 inches',\n  purchaseYear: 2016\n}\nfunction displayMyComputer(){\n  console.log(myComputer.operatingSystem + '\\n' + myComputer.screenSize + '\\n' + myComputer.purchaseYear);\n}\n// displayMyComputer();\n\nconst jeremy = {\n  name: 'Jeremy',\n  sayName: function(){\n    console.log('My name in the object is:', this.name);\n  }\n}\n// jeremy.sayName();\n\nfunction sayHi(input){\n  // for(var i = input; i < 3; i++){\n    if(input < 3){\n      console.log('hey');\n    } else {\n     console.log('None shall pass')\n    }\n  // }\n}\nsayHi(0);\nsayHi(4);\n\nvar testArray = ['item 1', 'item 2', 'item 3'];\n\ntestArray.push('extra item');\n\nfor(var i = 0; i < testArray.length; i++){\n  console.log(testArray[i]);\n}",
+			"settings":
+			{
+				"buffer_size": 2687,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 119.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"compE",
+				"Sublimerge: Compare to View..."
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"compar",
+				"Sublimerge: Compare to View..."
+			],
+			[
+				"package control: install package",
+				"Package Control: Install Package"
+			],
+			[
+				"package controll",
+				"Package Control: Install Package"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 540.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+			"function findMinMaxAvg(arr){",
+			"function sum_even(){"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff"
+	],
+	"file_history":
+	[
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/test_stuff.sublime-project",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/controllers/addMessagesController.js",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/views/addMessages.html",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/index.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/app.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/sidebar/sidebar.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/article/article.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/angular-cli.json",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/package.json",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/article/article.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/app.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/index.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/sidebar/sidebar.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/article/article.component.css",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/sidebar/sidebar.component.css",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/app.component.css",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/app.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/main.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/app.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/app/app.module.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/app.module.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/hello-world/hello-world.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/hello-world/hello-world.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/reddit-clone/src/styles.css",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-reddit/src/app/app.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-reddit/src/app/article/article.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-reddit/src/app/article/article.model.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-reddit/src/app/app.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-reddit/src/app/app.module.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-reddit/src/app/article/article.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/angular-reddit/src/app/app.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/ng-book/first-app/angular-reddit/src/app/app.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/test/angular-reddit/angular.json",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/test/angular-reddit/package.json",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/test/angular-reddit/package-lock.json",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-reddit-test/README.md",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-reddit-test/angular.json",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/user-item/user-item.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/user-item/user-item.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world/src/app/app.module.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/main.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/angular.json",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/user-list/user-list.component.html",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/user-list/user-list.component.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/user-list/user-list.component.css",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/app.component.css",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/app/user-item/user-item.component.spec.ts",
+		"/Users/jeremybwilson/Documents/Github/code/ng-book-code/first-app/angular-hello-world-test/src/index.html",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/views/editMessages.html",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/views/deleteMessages.html",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/controllers/deleteMessagesController.js",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/controllers/editMessagesController.js",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/app.js",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/package.json",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/index_foundation.html",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/index-async.html",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/bower.json",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/parens_valid.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/config.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/package.json",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/bower_components/angular/package.json",
+		"/Users/jeremybwilson/Documents/Github/code/messagelist/app/bower_components/angular/angular.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/js/script00.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/dist/main.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/index.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/js/script01.js",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/app/js/controllers.js",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/app/index-test.html",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/app/index.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/dist/js/bundle.js",
+		"/Users/jeremybwilson/Documents/Github/code/package-lock.json",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/find_common_characters.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/reverse_string.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/min_to_front.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/reverse_an_array.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/replace_first_char.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/say_hey.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/insert_at.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/pop_front_array.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/push_rear_array.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/js/index.js",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/app/app.css",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/find_odd_numbers.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/is_palindrome.js",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/test/servicesSpec.js",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/e2e-tests/scenarios.js",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/e2e-tests/protractor.conf.js",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/package.json",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/find_common_characters",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/find_square_and_sum.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/find_squared_value.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/swap_array_values.js",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/app/app00.js",
+		"/Users/jeremybwilson/Documents/Github/code/angularjsdemos/app/app.js",
+		"/Users/jeremybwilson/Documents/Github/code/angularfirebase/index.html",
+		"/Users/jeremybwilson/Documents/Github/code/angular-seed-master/app/bower_components/angular/angular.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/angular/angular_react_test.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/js/test03.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/js/test02.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/js/scratch_v9.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/code_exercises/soccer_scores.js",
+		"/Users/jeremybwilson/Downloads/8SBJ370VW140_en-us_es-us.xlf",
+		"/Users/jeremybwilson/Downloads/90BSN5BN592D_en-us_es-us.xlf",
+		"/Users/jeremybwilson/Downloads/Channel update XLFs/lenovo__en-us_es-us.xlf",
+		"/Users/jeremybwilson/Downloads/8PS7VW1L3BSR_en-us_es-us_pdpstorytelling.xlf",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/code_exercises/README.md",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/destinyapi/scripts.js",
+		"/Users/jeremybwilson/Documents/Github/code/javascript30/06TypeAhead/index00.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/index.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/react-app/index14_react.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/react-app/index13_react.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/react-app/index10_react.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/react-app/index11_react.html",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/react-app/index12_react.html",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/longest_palindrome.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/find_max.js",
+		"/Users/jeremybwilson/Downloads/12dd-hp-day__en-us_es-us.xlf",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/fizz_buzz.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/find_min_max_avg.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/greater_than_y.js",
+		"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13/shift_array_values.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/react-app/package.json",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/react-app/public/manifest.json",
+		"/Users/jeremybwilson/Documents/Github/code/angularnovninja/app/js/app.js",
+		"/Users/jeremybwilson/Documents/Github/code/angularnovninja/app/js/controllers.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/sandbox/todo/js/my.js",
+		"/Users/jeremybwilson/Documents/Github/code/test_stuff/react-app/src/index.js",
+		"/Users/jeremybwilson/Documents/Github/code/foundation-6.4.2-complete/index.html"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 103.0,
+		"where_history":
+		[
+			"/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/basic_13,/Users/jeremybwilson/Documents/Github/code/codingdojo_academy",
+			"<project>",
+			"/Users/jeremybwilson/Documents/Github/code/jquery_nov_to_ninja/chapter_03",
+			"/Users/jeremybwilson/Documents/Github/code/jquery_nov_to_ninja/chapter_02"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"AddMessagesController",
+			"todoList",
+			"en-us",
+			"array.push",
+			"myApp.controllers",
+			"2",
+			"1",
+			"secondary-color",
+			"<script type=\"text/javascript\" src=\"../../lib/jquery-ui-1.7.2.custom.min.js\" charset=\"utf-8\"></script>",
+			"<script src=\"../../lib/jquery-1.4.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>",
+			"<script src=\"../../lib/jquery-3.3.1.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>",
+			"li a",
+			"pacman",
+			"a",
+			"^\\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"3",
+			"1",
+			"0",
+			"<script type=\"text/javascript\" src=\"../../lib/jquery-ui.min.js\" charset=\"utf-8\"></script>",
+			"<script src=\"https://code.jquery.com/jquery-3.3.1.js\" integrity=\"sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=\" crossorigin=\"anonymous\"></script>\n<!-- <script src=\"../../lib/jquery-3.3.1.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script> -->",
+			"<script src=\"../../lib/jquery-3.3.1.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>",
+			"ninjaman",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "destinyapi/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 918,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								658,
+								658
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "sandbox/todo/dist/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1202,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								467,
+								467
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "sandbox/todo/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1206,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1143,
+								1143
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "sandbox/todo/js/script00.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2128,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1289,
+								1289
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "sandbox/todo/js/script01.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4762,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1341,
+								1306
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "sandbox/todo/src/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1434,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								545,
+								545
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/jeremybwilson/Documents/Github/code/messagelist/app/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 774,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								661,
+								661
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 373,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								370,
+								370
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"default_dir": "/Users/jeremybwilson/Documents/Github/code/angular-seed-master/app/js",
+							"git_gutter_is_enabled": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5789,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2419,
+								1234
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"default_dir": "/Users/jeremybwilson/Documents/Github/code/test_stuff/js",
+							"git_gutter_is_enabled": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7472,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2495,
+								2445
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"default_dir": "/Users/jeremybwilson/Documents/Github/code/codingdojo_academy/algorithms_class",
+							"git_gutter_is_enabled": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 639.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2687,
+								2687
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"default_dir": "/Users/jeremybwilson/Documents/Github",
+							"git_gutter_is_enabled": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 38.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 198.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.summary-panel":
+	{
+		"height": 100.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 102.0
+	},
+	"pinned_build_system": "Packages/User/node.sublime-build",
+	"project": "test_stuff.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 300.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

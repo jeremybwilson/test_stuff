@@ -7,63 +7,96 @@ function makeSandwichWith(meat, bread){
 }
 // console.log(makeSandwichWith('Ham', 'Wheat'));
 
-var todoList = {
-  todos: [],
-  displayTodos: function() {
-    // if todos.length is equal to zero
-    if(this.todos.length === 0){
-      console.log('Your todo list is empty!');
-    } else {
-      console.log('My Todos:');
-      for(var i = 0; i < this.todos.length; i++){
-        if(this.todos[i].completed === true){
-          console.log('(' + this.todos[i].completed + ')', this.todos[i].todoText);
-        } else {
-          console.log('(' + this.todos[i].completed + ')', this.todos[i].todoText);
-        }
-      }
-    }
-  },
-  addTodo: function(todoText) { // adds Todo text
-    this.todos.push({
-      todoText: todoText,
-      completed: false
-    });
-    this.displayTodos();
-  },
-  changeTodo: function(position, todoText) { // updates Todo text property, not the entire object
-    this.todos[position].todoText = todoText;
-    this.displayTodos();
-  },
-  deleteTodo: function(position) { // deletes Todo text
-    this.todos.splice(position, 1);
-    this.displayTodos();
-  },
-  toggleCompleted: function(position) { // toggles completed text
-    var todo = this.todos[position];
-    todo.completed = !todo.completed;
-    this.displayTodos();
-  },
-  toggleAll: function(){
-    var totalTodos = this.todos.length;
-    var completedTodos = 0;
+// setTimeout(function() {
+//   console.log('Wake up Gordon!');
+// }, 5000)
 
-    // Get number of completed todos
-    for (var i = 0; i < totalTodos; i++){
-      if(this.todos[i].completed === true){
-        completedTodos++;
-      }
-    }
-    // Case 1: if everything is true, make everything false
-    if(completedTodos === totalTodos){
-      for(var i = 0; i < totalTodos; i++){
-        this.todos[i].completed = false;
-      }
-    // Case 2: Otherwise, make everything true
-    } else {
-      for(var i = 0; i < totalTodos; i++){
-        this.todos[i].completed = true;
-      } 
-    }
-  }
-};
+var students = ['jeremy', 'alex', 'anika'];
+
+function logName(name){
+  console.log(name);
+}
+// logName(students[0]);
+// logName(students[1]);
+// logName(students[2]);
+
+// for(var i = 0; i < students.length; i++){
+//   logName(students[i]);
+// }
+// students.forEach(logName);
+// students.forEach(function(name){
+//   console.log(name);
+// })
+
+// function forEach(myArray, myFunction){
+//   for(var i = 0; i < myArray.length; i++){
+//     debugger;
+//     myFunction(myArray[i]);
+//   }
+// }
+// forEach(students, function(student){
+//   console.log(student);
+// })
+
+function multiplyTwoNumbers(x, y){
+  var result = x * y;
+  return result;
+}
+// console.log(multiplyTwoNumbers(2,10));
+
+
+function outerFunction(callback) {
+  callback();
+}
+
+function logThis() {
+  console.log(this);
+}
+
+/*
+ * Case 1: The regular old default case.
+ */
+ 
+// outerFunction(logThis); // window
+
+/*
+ * Case 2: Call the callback as a method
+ * (You'll probably NEVER see this, but I guess it's possible.)
+ */
+ 
+function callAsMethod(callback) {
+  var weirdObject = {
+    name: "Don't do this in real life"
+  };
+  
+  weirdObject.callback = callback;
+  weirdObject.callback();
+}
+
+callAsMethod(logThis); // `weirdObject` will get logged to the console
+
+/*
+ * Case 3: Calling the callback as a constructor. 
+ * (You'll also probably never see this. But in case you do...)
+ */
+ 
+function callAsConstructor(callback) {
+  new callback();
+}
+
+callAsConstructor(logThis); // the new object created by logThis will be logged to the console
+
+/*
+ * Case 4: Explicitly setting `this`.
+ */
+ 
+function callAndBindToGordon(callback) {
+  var boundCallback = callback.bind({name: 'Gordon'});
+  boundCallback();
+}
+
+callAndBindToGordon(logThis); // {name: 'Gordon'}
+
+// In a twist, we give `callAndBindToGordon` a function that's already been bound.
+var boundOnce = logThis.bind({name: 'The first time is forever'});
+callAndBindToGordon(boundOnce); // {name: 'The first time is forever'}
