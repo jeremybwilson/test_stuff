@@ -1,0 +1,53 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <title>React Hello World App</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      .editing {
+        font-weight: bold;
+      }
+      #root {
+        border:  1px solid black;
+        max-width: 80%;
+        margin: 0 auto;
+      }
+      h1 {
+        width: auto;
+      }
+    </style>
+  </head>
+  <body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+  function WelcomeLabel(props){
+   return <h1>Hello, {props.name}</h1>;
+  }
+
+ function WelcomeLabelApp(){
+  return (
+    <div>
+      <WelcomeLabel name="Jeremy Wilson" />
+      <WelcomeLabel name="Alex Wilson" />
+      <WelcomeLabel name="Anika Wilson" />
+    </div>
+  );
+ }
+
+  // const element = <WelcomeLabel name="Jeremy Wilson" />;
+  // ReactDOM.render(element, document.getElementById('root'));
+  ReactDOM.render(<WelcomeLabelApp />, document.getElementById('root'));
+
+  </script>
+</body>
+</html>

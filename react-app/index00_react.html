@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <title>React Hello World App</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      .editing {
+        font-weight: bold;
+      }
+      #root {
+        border:  1px solid black;
+        max-width: 80%;
+        margin: 0 auto;
+      }
+      h1 {
+        width: auto;
+      }
+    </style>
+  </head>
+  <body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+  const user = {
+    firstName: 'Jeremy',
+    lastName: 'Wilson',
+    animal: 'sexy beast'
+  };
+
+  function formatName(user) {
+    return user.firstName + ' ' + user.lastName;
+  }
+
+  function getGreeting(user) {
+    if (user) {
+      let greetingText = 'Hello';
+      let userName = formatName(user);
+      return greetingText + ', ' + userName + '!';
+    }
+    return <span>Hello, Stranger</span>;
+  }
+
+  function getTime(){
+    const time = new Date().toLocaleTimeString();
+    return time;
+  }
+
+  const element = (
+    <div class="greeting">
+      <h1>
+        {getGreeting(user)}, you {user.animal}!
+      </h1>
+      <h2>
+        It is {getTime()}!
+      </h2>
+    </div>
+  );
+
+  // const elementObj = {
+  //  type: 'h1',
+  //  props: {
+  //    className: 'greeting',
+  //    children: getGreeting(user)
+  //  }
+  // };
+
+  ReactDOM.render(element, document.getElementById('root'));
+  </script>
+  <!--
+    Note: this page is a great way to try React but it's not suitable for production.
+    It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+    To set up a production-ready React build environment, follow these instructions:
+    * https://reactjs.org/docs/add-react-to-a-new-app.html
+    * https://reactjs.org/docs/add-react-to-an-existing-app.html
+
+    You can also use React without JSX, in which case you can remove Babel:
+    * https://reactjs.org/docs/react-without-jsx.html
+    * https://reactjs.org/docs/cdn-links.html
+  -->
+</body>
+</html>
