@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <title>Todo App</title>
+    <style>
+      .editing {
+        font-weight: bold;
+      }
+      #out, #home {
+        border:  1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+  <div id='out'></div>
+
+  <script id="app" type='text/stache'>
+    <hello-world>Goodbye</hello-world>
+  </script>
+
+  <div id="home"></div>
+
+  <script id="home-template" type='text/stache'>
+    <inputs-demo>Goodbye</inputs-demo>
+  </script>
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery.min.js"></script>
+  <script src="https://canjs.com/release/latest/can.jquery.js"></script>
+  <script src="https://canjs.com/release/latest/can.map.define.js"></script>
+  <script src="https://canjs.com/release/latest/can.stache.js"></script>
+
+  <script type="text/javascript" id="demo-source">
+    can.Component.extend({
+      tag: 'hello-world',
+      template: can.stache("<h1>{{message}}</h1>"),
+      viewModel: {
+          message: "Hello World!"
+      }
+    });
+
+    $('#out').html( can.view("app", {}) );
+
+    can.Component.extend({
+      tag: "inputs-demo",
+      // template: can.view("home-template"),
+      template: can.view("<h1><content></content> {{subject}}</h1>"),
+      scope: new can.Map({subject: "Earth"}),
+      viewModel: {
+        message: "Goodbye World!"
+      }
+    });
+
+    $('#home').html( can.view ("home-template", {}) );
+
+</script>
+
+
+  <!-- 
+  <div id="demo-html">
+
+    <script id="player-list-stache" type="text/stache">
+      <ul>
+        {{#each players}}
+          <li {{#isEditing(.)}}class="editing"{{/isEditing}}
+            ($click)='editPlayer(.)'>{{name}}</li>
+        {{/each}}
+      </ul>
+      <player-edit 
+        (close)="removeEdit()" 
+        {player}="editingPlayer"/>
+    </script>
+    <script id="player-edit-stache" type="text/stache">
+      {{#if player}}
+        <input {($value)}="player.name"/>
+        <button ($click)="close()">X</button>
+      {{/if}}
+    </script>
+  </div> -->
+
+<!-- <script>
+can.Component.extend({
+  tag: "player-list",
+  template: can.view('player-list-stache'),
+  viewModel: {
+    players: new can.List([{name: "Jeremy"},{name: "Brian"},{name: "John"}]),
+    editPlayer: function(player){
+      this.attr("editingPlayer", player);
+    },
+    removeEdit: function(){
+      this.removeAttr("editingPlayer");
+    },
+    isEditing: function(player){
+      return this.attr("editingPlayer") === player;
+    }
+  }
+});
+
+can.Component.extend({
+  tag: "player-edit",
+  template: can.view('player-edit-stache'),
+  viewModel: {
+    close: function(){
+      this.dispatch("close");
+    }
+  }
+});
+
+$("#out").html(stache("<player-list/>")({}));
+</script> -->
+
+<script src="script.js"></script>
+</body>
+</html>
